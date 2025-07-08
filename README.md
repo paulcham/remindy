@@ -1,9 +1,10 @@
 # Remindy - Smart Reminder Chrome Extension
 
-A powerful Chrome extension that helps you stay on track with customizable reminders that can be scheduled to repeat on specific days, weekdays, or weekends, with flexible time intervals.
+A powerful Chrome extension that helps you stay on track with customizable recurring reminders. All reminders repeat at your chosen interval, on your chosen days, between your chosen hours.
 
 ## Features
 
+- **Recurring Reminders Only**: Every reminder repeats at a set interval (no one-time reminders)
 - **Flexible Scheduling**: Set reminders to repeat every XX minutes between specific hours
 - **Day Selection**: Choose individual days, weekdays, or weekends
 - **Markdown Support**: Rich text descriptions with markdown formatting
@@ -37,18 +38,12 @@ A powerful Chrome extension that helps you stay on track with customizable remin
 3. Fill in the details:
    - **Title**: A clear name for your reminder (e.g., "Exercise Break")
    - **Description**: Optional details with markdown support
-   - **Enable recurring**: Check this for repeating reminders
-
-### Configuring Repeat Settings
-
-When recurring reminders are enabled, you can set:
-
-- **Interval**: How often the reminder should repeat (in minutes)
-- **Active Hours**: The time range when reminders should be active
-- **Days**: Choose from:
-  - **Weekdays**: Monday through Friday
-  - **Weekends**: Saturday and Sunday
-  - **Specific**: Select individual days of the week
+   - **Repeat every**: Set the interval in minutes
+   - **Active hours**: Set the start and end time for reminders
+   - **Days**: Choose from:
+     - **Weekdays**: Monday through Friday
+     - **Weekends**: Saturday and Sunday
+     - **Specific**: Select individual days of the week
 
 ### Managing Reminders
 
@@ -123,10 +118,9 @@ remindy/
 
 ### Scheduling Logic
 
-The extension uses smart scheduling that:
-- Calculates the next valid occurrence based on day and time constraints
-- Handles edge cases like crossing midnight or weekend boundaries
-- Automatically reschedules after each notification
+- Reminders start at the beginning of the active hours and repeat at the specified interval.
+- If the browser is closed or the service worker is suspended, reminders will resume when Chrome is active again.
+- All reminders are recurring; there are no one-time reminders.
 
 ## Troubleshooting
 
@@ -141,9 +135,14 @@ The extension uses smart scheduling that:
 - Verify the current time is within the active hours
 
 ### Reminders Not Recurring
-- Confirm "Enable recurring reminders" is checked
-- Verify the schedule settings are correct
+- Confirm the schedule settings are correct
 - Check that at least one day is selected for specific day mode
+
+### Viewing Logs
+- To view logs and debug output from the background script:
+  1. Go to `chrome://extensions/`
+  2. Find Remindy and click the “Service Worker” link under “Inspect views”
+  3. This opens a DevTools window for the background script where all logs will appear
 
 ## Development
 
@@ -161,13 +160,14 @@ The codebase is modular and well-commented:
 - `popup.js` - Add new UI functionality
 - `popup.css` - Modify styling and layout
 
-## Contributing
+## Changelog
 
-Feel free to contribute improvements:
-1. Fork the repository
-2. Make your changes
-3. Test thoroughly
-4. Submit a pull request
+- **2024-07-08**
+  - All reminders are now recurring (no one-time reminders)
+  - The "Enable recurring reminders" checkbox has been removed
+  - Debug and test modes have been removed from the UI and background script
+  - UI is simplified and always shows repeat settings
+  - README updated for clarity and accuracy
 
 ## License
 
