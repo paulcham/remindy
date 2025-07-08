@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remindy</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>
+                <span class="icon">⏰</span>
+                Remindy
+            </h1>
+            <div class="header-actions">
+                <button id="addReminderBtn" class="btn btn-primary">
+                    <span class="icon">+</span>
+                    Add Reminder
+                </button>
+            </div>
+        </header>
+
+        <div class="content">
+            <!-- Reminder List -->
+            <div id="reminderList" class="reminder-list">
+                <div class="empty-state" id="emptyState">
+                    <div class="empty-icon">📝</div>
+                    <p>No reminders yet</p>
+                    <p class="empty-subtitle">Create your first reminder to get started!</p>
+                </div>
+            </div>
+
+            <!-- Add/Edit Reminder Form -->
+            <div id="reminderForm" class="reminder-form hidden">
+                <div class="form-header">
+                    <h2 id="formTitle">Add New Reminder</h2>
+                    <button id="closeFormBtn" class="btn btn-ghost">×</button>
+                </div>
+
+                <form id="reminderFormElement">
+                    <div class="form-group">
+                        <label for="reminderTitle">Title *</label>
+                        <input type="text" id="reminderTitle" placeholder="Exercise reminder" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="reminderDescription">Description</label>
+                        <textarea id="reminderDescription" placeholder="Time to do your stretches! **Remember** to:\n- Hold each stretch for 30 seconds\n- Breathe deeply\n- Stay hydrated" rows="4"></textarea>
+                        <small class="form-hint">Supports Markdown formatting</small>
+                    </div>
+
+                    <div id="repeatSettings" class="repeat-settings">
+                        <div class="form-group">
+                            <label for="intervalMinutes">Repeat every</label>
+                            <div class="input-group">
+                                <input type="number" id="intervalMinutes" min="1" max="1440" value="60">
+                                <span class="input-suffix">minutes</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Active hours</label>
+                            <div class="time-range">
+                                <input type="time" id="startTime" value="09:00">
+                                <span>to</span>
+                                <input type="time" id="endTime" value="18:00">
+                            </div>
+                            <small class="form-hint">Reminders will start at the beginning of active hours and repeat at regular intervals</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Days</label>
+                            <div class="day-selector">
+                                <div class="day-type-tabs">
+                                    <button type="button" class="day-tab active" data-type="weekdays">Weekdays</button>
+                                    <button type="button" class="day-tab" data-type="weekends">Weekends</button>
+                                    <button type="button" class="day-tab" data-type="specific">Specific</button>
+                                </div>
+                                
+                                <div id="specificDays" class="specific-days hidden">
+                                    <div class="day-buttons">
+                                        <button type="button" class="day-btn" data-day="0">Sun</button>
+                                        <button type="button" class="day-btn" data-day="1">Mon</button>
+                                        <button type="button" class="day-btn" data-day="2">Tue</button>
+                                        <button type="button" class="day-btn" data-day="3">Wed</button>
+                                        <button type="button" class="day-btn" data-day="4">Thu</button>
+                                        <button type="button" class="day-btn" data-day="5">Fri</button>
+                                        <button type="button" class="day-btn" data-day="6">Sat</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancelBtn" class="btn btn-secondary">Cancel</button>
+                        <button type="submit" id="saveBtn" class="btn btn-primary">Save Reminder</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reminder Item Template -->
+    <template id="reminderItemTemplate">
+        <div class="reminder-item" data-id="">
+            <div class="reminder-header">
+                <div class="reminder-title-section">
+                    <h3 class="reminder-title"></h3>
+                    <label class="toggle-switch">
+                        <input type="checkbox" class="reminder-toggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <div class="reminder-actions">
+                    <button class="btn btn-ghost btn-sm edit-btn" title="Edit">
+                        <span class="icon">✏️</span>
+                    </button>
+                    <button class="btn btn-ghost btn-sm delete-btn" title="Delete">
+                        <span class="icon">🗑️</span>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="reminder-description"></div>
+            
+            <div class="reminder-details">
+                <div class="reminder-schedule">
+                    <span class="schedule-info"></span>
+                </div>
+                <div class="reminder-status">
+                    <span class="status-badge"></span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="popup.js"></script>
+</body>
+</html> 
