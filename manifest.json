@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Remindy",
+  "version": "1.0.0",
+  "description": "A simple reminder system with customizable schedules",
+  "permissions": [
+    "notifications",
+    "storage",
+    "alarms"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "img/remindy_16x16.png",
+      "48": "img/remindy_48x48.png",
+      "128": "img/remindy_128x128.png"
+    }
+  },
+  "icons": {
+    "16": "img/remindy_16x16.png",
+    "48": "img/remindy_48x48.png",
+    "128": "img/remindy_128x128.png"
+  }
+}
+

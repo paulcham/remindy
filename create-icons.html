@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Icon Generator</title>
+</head>
+<body>
+  <h1>Remindy Icon Generator</h1>
+  <p>This page helps you create simple icons for the extension.</p>
+  <p>Open this file in a browser, right-click each canvas, and save as PNG with the appropriate name.</p>
+  
+  <h2>16x16 Icon</h2>
+  <canvas id="icon16" width="16" height="16"></canvas>
+  <button onclick="downloadIcon('icon16', 'icon16.png')">Download</button>
+  
+  <h2>48x48 Icon</h2>
+  <canvas id="icon48" width="48" height="48"></canvas>
+  <button onclick="downloadIcon('icon48', 'icon48.png')">Download</button>
+  
+  <h2>128x128 Icon</h2>
+  <canvas id="icon128" width="128" height="128"></canvas>
+  <button onclick="downloadIcon('icon128', 'icon128.png')">Download</button>
+  
+  <script>
+    function drawIcon(canvasId, size) {
+      const canvas = document.getElementById(canvasId);
+      const ctx = canvas.getContext('2d');
+      
+      // Draw a simple bell/reminder icon
+      ctx.fillStyle = '#1976d2';
+      ctx.fillRect(0, 0, size, size);
+      
+      ctx.fillStyle = 'white';
+      ctx.font = `${size * 0.6}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('R', size / 2, size / 2);
+    }
+    
+    function downloadIcon(canvasId, filename) {
+      const canvas = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+    
+    // Draw icons on load
+    window.onload = function() {
+      drawIcon('icon16', 16);
+      drawIcon('icon48', 48);
+      drawIcon('icon128', 128);
+    };
+  </script>
+</body>
+</html>
+
